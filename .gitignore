@@ -1,0 +1,9 @@
+/.idea
+/bin
+/boot
+/public
+/resources
+/tmp
+/vendor
+../../custom-cmf-smarty/www/vendor/custom-cmf/cmf/composer.lock
+composer.phar

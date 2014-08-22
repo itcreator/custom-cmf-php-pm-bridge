@@ -1,0 +1,42 @@
+{
+    "name": "custom-cmf/php-pm-bridge",
+    "version": "dev",
+    "keywords": ["Custom CMF", "php-pm", "react php", "highload", "cmf", "cms", "framework", "php"],
+    "authors": [
+        {
+            "name": "Vital Leshchyk",
+            "email": "vitalleshchyk@gmail.com"
+        }
+    ],
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-0": {
+            "Cmf\\PhpPm\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.4.3",
+        "custom-cmf/cmf": "dev-feature/phppm",
+        "marcj/php-pm": "@dev"
+    },
+    "include-path": ["vendor/doctrine/orm/lib", "."],
+    "minimum-stability": "dev",
+    "scripts": {
+        "post-install-cmd": [
+            "Cmf\\Application\\Composer\\Script::installApp",
+            "Cmf\\Application\\Composer\\Script::initEnvironment",
+            "Cmf\\Application\\Composer\\Script::updateDb",
+            "Cmf\\PublicResources\\Composer\\Script::installAssets"
+        ],
+        "post-update-cmd": [
+            "Cmf\\Application\\Composer\\Script::installApp",
+            "Cmf\\Application\\Composer\\Script::initEnvironment",
+            "Cmf\\Application\\Composer\\Script::updateDb",
+            "Cmf\\PublicResources\\Composer\\Script::installAssets"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+
+}
