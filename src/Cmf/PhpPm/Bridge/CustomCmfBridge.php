@@ -11,6 +11,8 @@ namespace Cmf\PhpPm\Bridge;
 
 use Cmf\PhpPm\Bootstrap\CustomCmfBootstrap;
 use PHPPM\Bridges\BridgeInterface;
+use React\Http\Request;
+use React\Http\Response;
 
 /**
  * This file is bridge for Custom CMF
@@ -38,16 +40,21 @@ class CustomCmfBridge implements BridgeInterface
     /**
      * @param \React\Http\Request $request
      * @param \React\Http\Response $response
+     * @param array $postData
      */
-    public function onRequest(\React\Http\Request $request, \React\Http\Response $response)
+    public function onRequest(Request $request, Response $response, array $postData)
     {
         if (null === ($app = $this->application)) {
             return;
         }
 
+        $_POST = $postData;
+
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP' . $request->getHttpVersion();
         $_SERVER['REQUEST_URI'] = $request->getPath();
         $_SERVER['SERVER_NAME'] = explode(':', $request->getHeaders()['Host'])[0];
+        $_SERVER['REQUEST_METHOD'] = $request->getMethod();
+        $_SERVER['REMOTE_ADDR'] = getenv('REMOTE_ADDR');
 
         try {
             $result = $this->application
